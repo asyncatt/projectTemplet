@@ -1,0 +1,47 @@
+{
+  "name": "projecttemplet",
+  "version": "1.0.0",
+  "description": "A templet for FE project.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "",
+    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dist": "cross-env NODE_ENV=production webpack -p",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChinTeo/projectTemplet.git"
+  },
+  "keywords": [
+    "templet"
+  ],
+  "author": "z.c.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChinTeo/projectTemplet/issues"
+  },
+  "homepage": "https://github.com/ChinTeo/projectTemplet#readme",
+  "devDependencies": {
+    "babel-loader": "^6.3.2",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.10.0",
+    "glob": "^7.1.1",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.0",
+    "open-browser-webpack-plugin": "0.0.4",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "babel-core": "^6.23.1",
+    "babel-preset-latest": "^6.22.0",
+    "babel-runtime": "^6.23.0"
+  }
+}

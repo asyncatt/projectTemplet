@@ -1,0 +1,9 @@
+{
+  "name": "projecttemplet",
+  "version": "1.0.0",
+  "description": "a simple templet.",
+  "bundlename": {
+    "js": "app",
+    "css": "style"
+  }
+}
