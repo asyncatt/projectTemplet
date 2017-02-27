@@ -1,9 +1,28 @@
 {
-  "name": "projecttemplet",
+  "name": "project",
   "version": "1.0.0",
   "description": "a simple templet.",
-  "bundlename": {
-    "js": "app",
-    "css": "style"
+  "server": {
+    "port": "9000"
+  },
+  "entry": {
+    "app": "./app.js",
+    "index": "./index.js"
+  },
+  "output": {
+    "hash": false,
+    "limit": 8000,
+    "common": true
+  },
+  "scss": {
+    "file": [],
+    "distname": "style",
+    "minify": true,
+    "md5": true
+  },
+  "eslint": false,
+  "common": {
+    "name": "common",
+    "chunks": ["app","index"]
   }
 }
