@@ -8,7 +8,7 @@ module.exports = {
 
     plugins: [
       new CleanWebpackPlugin([
-          'dist'
+          'dist/js'
       ], {
           root: __dirname,
           verbose: true,

@@ -28,15 +28,15 @@ var config = process.env.NODE_ENV === 'production' ? require(
 config.context = __dirname + "/src",
 config.entry = entry,
 config.output = {
-      path: __dirname + '/dist',
-      publicPath: '/dist',
+      path: __dirname + '/dist/js/',
+      publicPath: __dirname + '/dist/js/',
       filename: output
   };
 
 var loaders = [{
   test: /\.(png|jpg|svg)$/,
   include: path.resolve(__dirname, 'src'),
-  loader: 'url-loader?limit=' + limit
+  loader: 'url-loader?limit=' + limit + '&name=../images/[hash:8].[name].[ext]'
 }, {
   test: /\.css$/,
   include: path.resolve(__dirname, 'src'),
