@@ -25,34 +25,37 @@ __请使用 es6 开发，并使用 sass 编写样式文件。__
 project.json 文件格式如下：
 
 ```
-    {
-      "name": "project", //项目名称
-      "version": "1.0.0", //项目版本号
-      "description": "a simple templet.", //项目描述
-      "server": { //webpack-dev-server 服务器相关配置
-        "port": "9000" //开启服务器的端口号，默认 9000
-      },
-      "entry": { //入口文件相关配置
-        "app": "./app.js", //入口文件
-        "index": "./index.js" //入口文件，若有多个入口文件
-      },
-      "output": {
-        "hash": false,
-        "limit": 8000,
-        "common": true
-      },
-      "scss": {
-        "file": [],
-        "distname": "style",
-        "minify": true,
-        "md5": true
-      },
-      "eslint": true,
-      "common": {
-        "name": "common",
-        "chunks": ["app", "index"]
-      }
-    }
+{
+  "name": "project", //项目名称
+  "version": "1.0.0", //项目版本号
+  "description": "a simple templet.", //项目描述
+  "server": { //webpack-dev-server 服务器相关配置
+    "port": "9000" //开启服务器的端口号，默认 9000
+  },
+  "entry": { //入口文件相关配置
+    "app": "./app.js", //入口文件
+    "index": "./index.js" //入口文件，若有多个入口文件
+  },
+  "output": {
+    "hash": false,
+    "common": true
+  },
+  "img": {
+    "limit": 8000,
+    "minify": false
+  },
+  "scss": {
+    "file": [],
+    "distname": "style",
+    "minify": true,
+    "md5": true
+  },
+  "eslint": true,
+  "common": {
+    "name": "common",
+    "chunks": ["app", "index"]
+  }
+}
 
 ```
 
@@ -62,7 +65,7 @@ project.json 文件格式如下：
 
 ```
 "entry": {
-    "[output-file-name]": "[entry-file-path]"
+  "[output-file-name]": "[entry-file-path]"
 }
 ```
 output-file-name 处填写生成的文件名称，entry-file-path 处填写入口文件路径。
@@ -71,7 +74,7 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 ```
 "entry": {
-    "[output-file-name]": ["[entry-file1-path]", "[entry-file2-path]"]
+  "[output-file-name]": ["[entry-file1-path]", "[entry-file2-path]"]
 }
 ```
 将多个入口文件写在一个数组中。
@@ -80,8 +83,8 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 ```
 "entry": {
-    "[output-file1-name]": "[entry-file1-path]",  
-    "[output-file2-name]": "[entry-file2-path]"
+  "[output-file1-name]": "[entry-file1-path]",  
+  "[output-file2-name]": "[entry-file2-path]"
 }
 ```
 
@@ -89,10 +92,11 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 生成文件相关配置写在 output 字段中。
 
+* __publicPath__ 配置上线的文件路径。如果缺省此字段默认是和文件打包路径相同的。注意：只有当你确认上线的文件路径时才可以配此字段。
 * __hash__  生成的文件是否需要hash命名。 true | false。默认为false。
 * __common__ 是否需要把多个生成文件的公共代码提取成单独文件 common.js 。true|false。默认为false。
     如果需要更改提取的go'g公共代码文件名称，在 common 字段的 name 处进行配置。默认 name 为 'common'。
-* __limit__ 图片文件转 base64 大小限制。默认 8000， 小于 8000b 的图片文件将转为 base64。
+
 
 ### __提取公共代码__
 
@@ -100,8 +104,8 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 ```
 "common": {
-    "name": "common",
-    "chunks": ["app", "index"]
+  "name": "common",
+  "chunks": ["app", "index"]
 }
 ```
 name 字段用来设置公共代码文件名称，默认为common。（注意只写名字不用加后缀）。    
@@ -111,6 +115,13 @@ chunks 字段用来指定需要提取公共代码的生成文件，如例子中�
 ### __启用eslint__
 
 eslint 校验默认为关闭。若要启用 eslint ， 将 eslint 字段复制为 true 即可。
+
+### __图片打包配置__
+
+图片文件配置在 img 字段中。
+
+* __limit__ 图片文件转 base64 大小限制。默认 8000， 小于 8000b 的图片文件将转为 base64。
+* __minify__ 是否对图片进行压缩处理。
 
 ### __scss编译配置__
 
@@ -122,19 +133,19 @@ scss 编译相关配置在 scss 字段中，详见下一段 __编译scss__。
 
 如果想将 scss 文件单独处理，可以将想要编译的 scss 文件路径填入 project.json 的 scss.name 字段中，然后运行以下命令：
 ```
-        npm run scss
+npm run scss
 ```
 会将 scss 文件编译为 css 并产出在 dist/css 路径下。
 
 __scss 编译配置__
 
 ```
-    "scss": {
-        "file": [],//scss 文件入口
-        "distname": "style",//打包文件名称
-        "minify": true,// 是否压缩
-        "md5": true //是否添加MD5命名
-    }
+"scss": {
+    "file": [],//scss 文件入口
+    "distname": "style",//打包文件名称
+    "minify": true,// 是否压缩
+    "md5": true //是否添加MD5命名
+}
 ```
 # __项目调试__  
 
@@ -147,7 +158,7 @@ npm run start
 打包项目文件
 
 ```
-   npm run build
+npm run build
 ```
 
 打包线上文件（混淆压缩）
@@ -162,10 +173,10 @@ npm run dist
 
 example：
 ```
-    {
-      "name": "myproject"
-      ...
-    }
+  {
+    "name": "myproject"
+    ...
+  }
 ```
 打包后的文件名即为 myproject。
 # 目录结构
@@ -211,16 +222,22 @@ example：
 * __babel-core babel__ 编译核心代码
 * __babel-preset-latest__
 * __babel-runtime__
-
 * __eslint-config-airbnb__ eslint 相关依赖
 * __eslint-plugin-import__
 * __eslint-plugin-jsx-a11y__
 * __eslint-plugin-react__
-
 * __gulp__  gulp 项目构建工具
 * __gulp-concat__ gulp 文件合并
 * __gulp-minify-css__ gulp 压缩css
 * __gulp-rev__ gulp 文件添加md5后缀
+
+# 状态分析
+
+webpack 会记录打包状态，可以使用 ```npm run stat``` 来生成记录文件 stat.json。
+
+将 stat.json 上传至以下网站即可获取可视化数据。  
+[官方分析平台](http://webpack.github.io/analyse/#home)  
+[Webpack Visualizer ](http://chrisbateman.github.io/webpack-visualizer/)
 
 # 常见问题
 

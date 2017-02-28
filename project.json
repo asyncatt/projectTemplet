@@ -10,9 +10,13 @@
     "index": "./index.js"
   },
   "output": {
+    "publicPath": "dist/js",
     "hash": false,
-    "limit": 8000,
     "common": true
+  },
+  "img": {
+    "limit": 8000,
+    "minify": true
   },
   "scss": {
     "file": [],

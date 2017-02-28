@@ -15,9 +15,16 @@ if(typeof pro.entry === "undefined"){
 }
 
 var entry = pro.entry;//获取入口文件配置
-var limit = pro.output.limit||8000;//图片文件转base64的大小限制（小于limit的图片将被转换为base64）
+var limit = pro.img.limit||8000;//图片文件转base64的大小限制（小于limit的图片将被转换为base64）
 var eslint = pro.eslint;//是否开启eslint校验
 var common = pro.output.common;//是否提取公共代码
+
+var loaderOptions = {};
+var outputPath = __dirname + '/dist/js/';
+var publicPath = outputPath;
+if(pro.output.publicPath){
+  publicPath = pro.output.publicPath;
+}
 
 var output;
 !!pro.output.hash?output = './[name].[hash].js':output = './[name].js';//是否启用hash命名文件
@@ -28,15 +35,41 @@ var config = process.env.NODE_ENV === 'production' ? require(
 config.context = __dirname + "/src",
 config.entry = entry,
 config.output = {
-      path: __dirname + '/dist/js/',
-      publicPath: __dirname + '/dist/js/',
+      path: outputPath,
+      publicPath: publicPath,
       filename: output
   };
 
+var imgLoader = [
+  'url-loader?limit=' + limit + '&name=../images/[hash:8].[name].[ext]'
+];
+if(pro.img.minify){
+  imgLoader.push('image-webpack-loader');
+  loaderOptions.imageWebpackLoader = {
+    mozjpeg: {
+      quality: 65
+    },
+    pngquant:{
+      quality: "65-90",
+      speed: 4
+    },
+    svgo:{
+      plugins: [
+        {
+          removeViewBox: false
+        },
+        {
+          removeEmptyAttrs: false
+        }
+      ]
+    }
+  }
+}
+
 var loaders = [{
-  test: /\.(png|jpg|svg)$/,
+  test: /\.(gif|png|jpe?g|svg)$/,
   include: path.resolve(__dirname, 'src'),
-  loader: 'url-loader?limit=' + limit + '&name=../images/[hash:8].[name].[ext]'
+  loaders: imgLoader
 }, {
   test: /\.css$/,
   include: path.resolve(__dirname, 'src'),
@@ -82,6 +115,9 @@ if(common){
 
 
   config.plugins.unshift(
+    new webpack.LoaderOptionsPlugin({
+      options: loaderOptions
+    }),
     new webpack.optimize.CommonsChunkPlugin(pro.common)
   )
 

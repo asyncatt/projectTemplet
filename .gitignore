@@ -41,3 +41,6 @@ jspm_packages
 
 # css rev
 rev
+
+# stat json
+stat.json

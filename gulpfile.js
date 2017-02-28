@@ -1,15 +1,17 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 //- 多个文件合并为一个；
-
 var minifyCss = require('gulp-minify-css');
 //- 压缩CSS为一行；
-
 var rev = require('gulp-rev');
 //- 对文件名加MD5后缀
 var chalk = require('chalk');
+var gutil = require('gutil');
+var webpack = require('webpack');
+var config = require('./webpack.config');
 
 var pro = require('./project.json');
+
 /** 编译scss 文件
 */
 var scssFlie, distname;
@@ -40,6 +42,31 @@ gulp.task('scss', function() {
   if(pro.scss.md5){
     file = file.pipe(rev())    //- 文件名加MD5后缀
   }
-  
+
   file.pipe(gulp.dest('./dist/css'))  //- 输出文件本地
 });
+
+gulp.task('webpack',function() {
+    webpack(config,function(error, stats) {
+        if (error) throw new gutil.PluginError('webpack', chalk.red(error));
+        console.log('[webpack]', stats);
+
+    });
+});
+/** 图片压缩
+*/
+const imagemin = require('imagemin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPngquant = require('imagemin-pngquant');
+
+gulp.task('picmin', function(){
+  imagemin(['images/*.{jpg,png}'], 'build/images', {
+      plugins: [
+          imageminMozjpeg({targa: true}),
+          imageminPngquant({quality: '65-80'})
+      ]
+  }).then(files => {
+      console.log(files);
+      //=> [{data: <Buffer 89 50 4e …>, path: 'build/images/foo.jpg'}, …]
+  });
+})
