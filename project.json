@@ -6,13 +6,12 @@
     "port": "9000"
   },
   "entry": {
-    "app": "./app.js",
     "index": "./index.js"
   },
   "output": {
     "publicPath": "dist/js",
     "hash": false,
-    "common": true
+    "common": false
   },
   "img": {
     "limit": 8000,

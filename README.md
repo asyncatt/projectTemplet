@@ -1,5 +1,5 @@
 # projectTemplet
-58无线前端项目构建模板。为前端项目搭建提供统一的规范。
+前端项目构建模板。为前端项目搭建提供统一的规范。
 
 __请使用 es6 开发，并使用 sass 编写样式文件。__
 
@@ -25,37 +25,37 @@ __请使用 es6 开发，并使用 sass 编写样式文件。__
 project.json 文件格式如下：
 
 ```
-{
-  "name": "project", //项目名称
-  "version": "1.0.0", //项目版本号
-  "description": "a simple templet.", //项目描述
-  "server": { //webpack-dev-server 服务器相关配置
-    "port": "9000" //开启服务器的端口号，默认 9000
-  },
-  "entry": { //入口文件相关配置
-    "app": "./app.js", //入口文件
-    "index": "./index.js" //入口文件，若有多个入口文件
-  },
-  "output": {
-    "hash": false,
-    "common": true
-  },
-  "img": {
-    "limit": 8000,
-    "minify": false
-  },
-  "scss": {
-    "file": [],
-    "distname": "style",
-    "minify": true,
-    "md5": true
-  },
-  "eslint": true,
-  "common": {
-    "name": "common",
-    "chunks": ["app", "index"]
-  }
-}
+    {
+      "name": "project", //项目名称
+      "version": "1.0.0", //项目版本号
+      "description": "a simple templet.", //项目描述
+      "server": { //webpack-dev-server 服务器相关配置
+        "port": "9000" //开启服务器的端口号，默认 9000
+      },
+      "entry": { //入口文件相关配置
+        "app": "./app.js", //入口文件
+        "index": "./index.js" //入口文件，若有多个入口文件
+      },
+      "output": {
+        "hash": false,
+        "common": true
+      },
+      "img": {
+        "limit": 8000,
+        "minify": false
+      },
+      "scss": {
+        "file": [],
+        "distname": "style",
+        "minify": true,
+        "md5": true
+      },
+      "eslint": true,
+      "common": {
+        "name": "common",
+        "chunks": ["app", "index"]
+      }
+    }
 
 ```
 
@@ -65,7 +65,7 @@ project.json 文件格式如下：
 
 ```
 "entry": {
-  "[output-file-name]": "[entry-file-path]"
+    "[output-file-name]": "[entry-file-path]"
 }
 ```
 output-file-name 处填写生成的文件名称，entry-file-path 处填写入口文件路径。
@@ -74,7 +74,7 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 ```
 "entry": {
-  "[output-file-name]": ["[entry-file1-path]", "[entry-file2-path]"]
+    "[output-file-name]": ["[entry-file1-path]", "[entry-file2-path]"]
 }
 ```
 将多个入口文件写在一个数组中。
@@ -83,8 +83,8 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 ```
 "entry": {
-  "[output-file1-name]": "[entry-file1-path]",  
-  "[output-file2-name]": "[entry-file2-path]"
+    "[output-file1-name]": "[entry-file1-path]",  
+    "[output-file2-name]": "[entry-file2-path]"
 }
 ```
 
@@ -104,8 +104,8 @@ output-file-name 处填写生成的文件名称，entry-file-path 处填写入�
 
 ```
 "common": {
-  "name": "common",
-  "chunks": ["app", "index"]
+    "name": "common",
+    "chunks": ["app", "index"]
 }
 ```
 name 字段用来设置公共代码文件名称，默认为common。（注意只写名字不用加后缀）。    
@@ -133,20 +133,28 @@ scss 编译相关配置在 scss 字段中，详见下一段 __编译scss__。
 
 如果想将 scss 文件单独处理，可以将想要编译的 scss 文件路径填入 project.json 的 scss.name 字段中，然后运行以下命令：
 ```
-npm run scss
+        npm run scss
 ```
 会将 scss 文件编译为 css 并产出在 dist/css 路径下。
 
 __scss 编译配置__
 
 ```
-"scss": {
-    "file": [],//scss 文件入口
-    "distname": "style",//打包文件名称
-    "minify": true,// 是否压缩
-    "md5": true //是否添加MD5命名
-}
+    "scss": {
+        "file": [],//scss 文件入口
+        "distname": "style",//打包文件名称
+        "minify": true,// 是否压缩
+        "md5": true //是否添加MD5命名
+    }
 ```
+# __使用 React__
+
+默认情况下是不支持 react 环境的，如果想要使用 react，需要初始化 react 环境。  
+
+执行 ```npm run init-react``` 来安装配置 react。 命令执行完毕后即可在项目中使用 react 了。
+
+虽然也许用不到，但是如果发现项目不适合 react 的话需要卸载 react 环境，可以执行 ```npm run uninstall-react``` 来清理 react 相关配置。
+
 # __项目调试__  
 
 开启本地服务器运行项目
@@ -158,7 +166,7 @@ npm run start
 打包项目文件
 
 ```
-npm run build
+   npm run build
 ```
 
 打包线上文件（混淆压缩）
@@ -173,10 +181,10 @@ npm run dist
 
 example：
 ```
-  {
-    "name": "myproject"
-    ...
-  }
+    {
+      "name": "myproject"
+      ...
+    }
 ```
 打包后的文件名即为 myproject。
 # 目录结构
@@ -222,10 +230,12 @@ example：
 * __babel-core babel__ 编译核心代码
 * __babel-preset-latest__
 * __babel-runtime__
+
 * __eslint-config-airbnb__ eslint 相关依赖
 * __eslint-plugin-import__
 * __eslint-plugin-jsx-a11y__
 * __eslint-plugin-react__
+
 * __gulp__  gulp 项目构建工具
 * __gulp-concat__ gulp 文件合并
 * __gulp-minify-css__ gulp 压缩css

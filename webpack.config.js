@@ -32,6 +32,10 @@ var output;
 var config = process.env.NODE_ENV === 'production' ? require(
   './webpack.config.prod.js') : require('./webpack.config.dev.js');
 
+var isReact = process.env.REACT_ENV;
+
+console.log('isreact',isReact);
+
 config.context = __dirname + "/src",
 config.entry = entry,
 config.output = {
@@ -40,6 +44,7 @@ config.output = {
       filename: output
   };
 
+//处理img-loader
 var imgLoader = [
   'url-loader?limit=' + limit + '&name=../images/[hash:8].[name].[ext]'
 ];
@@ -120,6 +125,8 @@ if(common){
     }),
     new webpack.optimize.CommonsChunkPlugin(pro.common)
   )
+
+
 
 }
 
