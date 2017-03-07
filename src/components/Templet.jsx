@@ -7,8 +7,7 @@ import React from 'react';
 import '../static/style/index.scss';
 const App = () => (
     <div className="header">
-      <h2>hahahaahahh!!!!!sssaaaaaaaaaaa</h2>
-      <h1>great!</h1>
+      <h2>React is available now!</h2>
     </div>
 
 )
