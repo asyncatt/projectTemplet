@@ -14,7 +14,9 @@ var port = pro.server.port;
 config.devtool = "source-map";
 
 config.devServer = {
-  contentBase: path.join(__dirname, "/"),
+  // contentBase: path.join(__dirname, "/"),
+  publicPath: pro.output.publicPath,
+  historyApiFallback: true,
   compress: true,
   port: port,
   hot: true,
@@ -22,7 +24,7 @@ config.devServer = {
 }
 config.plugins = [
   new webpack.HotModuleReplacementPlugin(),
-  new OpenBrowserPlugin({ url: 'http://localhost:' + port })
+  new OpenBrowserPlugin({ url: 'http://localhost:' + port + '/views'})
 ]
 
 

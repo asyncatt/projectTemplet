@@ -207,6 +207,7 @@ example：
 │        ├── js     js资源文件
 │        ├── style  样式资源文件
 │        └── img    图片资源
+├── views           模板文件目录
 ├── webpack.config.dev.js  
 ├── webpack.config.js  
 └── webpack.config.prod.js  
@@ -251,6 +252,13 @@ webpack 会记录打包状态，可以使用 ```npm run stat``` 来生成记录�
 
 # 常见问题
 
-* 问题描述：浏览器提示 ==webpackJsonp is not defined==  
+* 问题描述：浏览器提示 ```webpackJsonp is not defined``` 
   问题原因：因为启用了 common，在模板中把 common 文件放在了其他文件后面。  
   解决方法：把common 文件的引用位置放在其他文件前面即可。
+
+* 出现错误提示：
+```events.js:72
+        throw er; // Unhandled 'error' event
+              ^
+```
+一般就是已经运行的另一个服务器使用了相同的端口，请检查是否已开启服务。

@@ -9,7 +9,7 @@
     "index": "./index.js"
   },
   "output": {
-    "publicPath": "dist/js",
+    "publicPath": "/views",
     "hash": false,
     "common": false
   },

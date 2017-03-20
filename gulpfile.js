@@ -8,8 +8,16 @@ var rev = require('gulp-rev');
 //- 对文件名加MD5后缀
 var chalk = require('chalk');
 var gutil = require('gutil');
+
 var webpack = require('webpack');
 var config = require('./webpack.config');
+
+var arg = process.argv.slice(2);
+
+gulp.task('test',function(){
+  console.log(arg);
+})
+
 
 var pro = require('./project.json');
 

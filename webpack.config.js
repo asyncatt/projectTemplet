@@ -20,10 +20,12 @@ var eslint = pro.eslint;//是否开启eslint校验
 var common = pro.output.common;//是否提取公共代码
 
 var loaderOptions = {};
+var isProduction = process.env.NODE_ENV === 'production';
 var outputPath = __dirname + '/dist/js/';
 var publicPath = outputPath;
-if(pro.output.publicPath){
-  publicPath = pro.output.publicPath;
+if(pro.output.publicPath&&!isProduction){
+  publicPath = '/';
+  outputPath = __dirname + pro.output.publicPath;
 }
 
 var output;
@@ -31,10 +33,6 @@ var output;
 
 var config = process.env.NODE_ENV === 'production' ? require(
   './webpack.config.prod.js') : require('./webpack.config.dev.js');
-
-var isReact = process.env.REACT_ENV;
-
-console.log('isreact',isReact);
 
 config.context = __dirname + "/src",
 config.entry = entry,
