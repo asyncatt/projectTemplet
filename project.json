@@ -27,5 +27,7 @@
   "common": {
     "name": "common",
     "chunks": ["app","index"]
+  },
+  "externals": {
   }
 }

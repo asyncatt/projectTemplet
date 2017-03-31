@@ -113,6 +113,9 @@ config.resolve = {
   }
 };
 
+if(pro.externals!={}){
+  config.externals = pro.externals;
+}
 if(common){
   console.log(chalk.green("make common file..."));
 

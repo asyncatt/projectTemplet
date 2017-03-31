@@ -54,6 +54,9 @@ project.json 文件格式如下：
       "common": {
         "name": "common",
         "chunks": ["app", "index"]
+      },
+      "externals": {
+
       }
     }
 
@@ -147,6 +150,25 @@ __scss 编译配置__
         "md5": true //是否添加MD5命名
     }
 ```
+
+__全局依赖配置__
+externals 字段用来配置全局依赖，会阻止将配置的依赖包打包到代码中。
+
+例如在使用了 jquery 后想要将 jquery 文件与打包文件分离，配置如下：
+```
+externals: {
+  jquery: 'jQuery'
+}
+```
+配置后可以照常 import jquery文件：
+```
+import $ from 'jquery';
+
+$('.my-element').animate(...);
+```
+但此时不会将 jquery 模块打包。  
+所以需要在页面另行引入 jquery。
+
 # __使用 React__
 
 默认情况下是不支持 react 环境的，如果想要使用 react，需要初始化 react 环境。  
@@ -154,6 +176,18 @@ __scss 编译配置__
 执行 ```npm run init-react``` 来安装配置 react。 命令执行完毕后即可在项目中使用 react 了。
 
 虽然也许用不到，但是如果发现项目不适合 react 的话需要卸载 react 环境，可以执行 ```npm run uninstall-react``` 来清理 react 相关配置。
+
+__react 依赖库分离__
+
+如下配置 externals 字段：
+```
+externals: {
+  'react': 'React',
+  'react-dom': 'ReactDOM'
+}
+```
+此配置会阻止将react及react-dom依赖打包到代码中。  
+注意：因为打包后的文件不包含react，因此需要在页面内另引入 react 及 react-dom 文件。
 
 # __项目调试__  
 
@@ -252,7 +286,7 @@ webpack 会记录打包状态，可以使用 ```npm run stat``` 来生成记录�
 
 # 常见问题
 
-* 问题描述：浏览器提示 ```webpackJsonp is not defined``` 
+* 问题描述：浏览器提示 ```webpackJsonp is not defined```
   问题原因：因为启用了 common，在模板中把 common 文件放在了其他文件后面。  
   解决方法：把common 文件的引用位置放在其他文件前面即可。
 
