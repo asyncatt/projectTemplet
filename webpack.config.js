@@ -47,32 +47,36 @@ var imgLoader = [
   'url-loader?limit=' + limit + '&name=../images/[hash:8].[name].[ext]'
 ];
 if(pro.img.minify){
-  imgLoader.push('image-webpack-loader');
-  loaderOptions.imageWebpackLoader = {
-    mozjpeg: {
-      quality: 65
-    },
-    pngquant:{
-      quality: "65-90",
-      speed: 4
-    },
-    svgo:{
-      plugins: [
-        {
-          removeViewBox: false
-        },
-        {
-          removeEmptyAttrs: false
-        }
-      ]
+  imgLoader.push(
+    {
+      loader: 'image-webpack-loader',
+      options: {
+          mozjpeg: {
+              quality: 65,
+          },
+          pngquant: {
+              quality: '65-90',
+              speed: 4,
+          },
+          svgo: {
+              plugins: [
+                  {
+                      removeViewBox: false,
+                  },
+                  {
+                      removeEmptyAttrs: false,
+                  },
+              ],
+          }
+      }
     }
-  }
+  );
 }
 
 var loaders = [{
   test: /\.(gif|png|jpe?g|svg)$/,
   include: path.resolve(__dirname, 'src'),
-  loaders: imgLoader
+  use: imgLoader
 }, {
   test: /\.css$/,
   include: path.resolve(__dirname, 'src'),
